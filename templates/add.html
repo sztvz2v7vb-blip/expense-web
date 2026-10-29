@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Трекер расходов</title>
+    <style>
+        body { font-family: Arial; max-width: 700px; margin: 40px auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f0f0f0; }
+        a.btn { display: inline-block; padding: 8px 16px; background: #007bff;
+                color: white; text-decoration: none; border-radius: 4px; }
+        .delete { color: red; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Трекер расходов</h1>
+    <a class="btn" href="/add">➕ Добавить расход</a>
+
+    <h3>Всего: {{ "%.2f"|format(total) }}</h3>
+
+    {% if expenses %}
+    <table>
+        <tr><th>#</th><th>Сумма</th><th>Категория</th><th></th></tr>
+        {% for e in expenses %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ e.amount }}</td>
+            <td>{{ e.category }}</td>
+            <td><a class="delete" href="/delete/{{ loop.index0 }}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>Пока пусто. Добавьте первый расход.</p>
+    {% endif %}
+</body>
+</html>
